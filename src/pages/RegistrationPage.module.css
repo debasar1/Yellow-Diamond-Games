@@ -1,0 +1,32 @@
+.container {
+  min-height: 100vh; background: var(--yd-bg);
+  display: flex; align-items: center; justify-content: center; padding: 20px;
+}
+.card {
+  background: #fff; border-radius: 24px; padding: 28px 24px;
+  width: 100%; max-width: 380px; box-shadow: var(--shadow);
+}
+.title { font-size: 26px; font-weight: 800; color: var(--yd-red-dark); margin-bottom: 4px; }
+.subtitle { font-size: 14px; color: var(--yd-subtext); margin-bottom: 20px; }
+.form { display: flex; flex-direction: column; gap: 12px; }
+.form label { font-size: 14px; font-weight: 600; color: var(--yd-text); margin-bottom: -6px; }
+.mobileRow { display: flex; gap: 8px; align-items: center; }
+.prefix {
+  background: #f5f5f5; border: 2px solid #d0b860; border-radius: 12px;
+  padding: 12px 10px; font-size: 16px; font-weight: 600; color: var(--yd-subtext); white-space: nowrap;
+}
+.otpInfo { font-size: 14px; color: var(--yd-subtext); text-align: center; }
+.otpInput { letter-spacing: 8px; font-size: 24px; text-align: center; font-weight: 700; }
+.consent { font-size: 12px; color: #888; line-height: 1.5; }
+.error { font-size: 13px; color: var(--yd-red); background: #ffebee; padding: 8px 12px; border-radius: 8px; }
+.btnSubmit {
+  background: var(--yd-red); color: #fff; border: none; border-radius: var(--radius);
+  padding: 14px; font-family: var(--font); font-size: 17px; font-weight: 700;
+  cursor: pointer; margin-top: 4px;
+}
+.btnSubmit:disabled { opacity: 0.5; cursor: not-allowed; }
+.btnLink { background: none; border: none; font-family: var(--font); font-size: 14px;
+  color: var(--yd-subtext); text-decoration: underline; cursor: pointer; text-align: center; }
+.successBox { text-align: center; padding: 20px 0; }
+.successIcon { font-size: 64px; }
+.successText { font-size: 20px; font-weight: 700; color: var(--yd-green); margin-top: 12px; }

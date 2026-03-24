@@ -1,0 +1,38 @@
+.container {
+  min-height: 100vh; background: var(--yd-yellow); padding: 20px;
+  display: flex; flex-direction: column; align-items: center; gap: 16px;
+}
+.loading { display: flex; align-items: center; justify-content: center; height: 100vh; font-size: 20px; }
+.back { align-self: flex-start; background: none; border: none; font-family: var(--font);
+  font-size: 15px; color: var(--yd-subtext); cursor: pointer; }
+.title { font-size: 26px; font-weight: 800; color: var(--yd-red-dark); }
+.balanceCard {
+  background: var(--yd-red); color: #fff; border-radius: 24px; padding: 28px;
+  width: 100%; max-width: 340px; text-align: center; box-shadow: var(--shadow);
+}
+.balanceLabel { font-size: 14px; opacity: 0.85; }
+.balanceNum { font-size: 64px; font-weight: 800; line-height: 1.1; }
+.balanceSub { font-size: 16px; font-weight: 600; opacity: 0.9; }
+.statsRow { display: flex; gap: 16px; width: 100%; max-width: 340px; }
+.stat {
+  flex: 1; background: #fff; border-radius: 16px; padding: 16px;
+  text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.statNum { font-size: 28px; font-weight: 800; color: var(--yd-red-dark); }
+.statLabel { font-size: 13px; color: var(--yd-subtext); margin-top: 2px; }
+.redeemBox {
+  background: #fff; border-radius: 20px; padding: 20px; width: 100%;
+  max-width: 340px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.redeemTitle { font-size: 17px; font-weight: 700; color: var(--yd-text); margin-bottom: 6px; }
+.redeemDesc { font-size: 13px; color: var(--yd-subtext); margin-bottom: 14px; }
+.btnComingSoon {
+  background: #ccc; color: #fff; border: none; border-radius: var(--radius);
+  padding: 12px 24px; font-family: var(--font); font-size: 16px; font-weight: 700;
+  cursor: not-allowed; width: 100%;
+}
+.btnPlay {
+  background: var(--yd-green); color: #fff; border: none; border-radius: var(--radius);
+  padding: 14px 28px; font-family: var(--font); font-size: 17px; font-weight: 700;
+  cursor: pointer; width: 100%; max-width: 340px;
+}

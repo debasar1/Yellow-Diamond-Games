@@ -1,0 +1,57 @@
+{
+  "home": {
+    "title": "Yellow Diamond\nCrunch Run",
+    "tagline": "खेलो, जीतो, YD Coins कमाओ!",
+    "playRunner": "Crunch Run खेलें",
+    "playBreaker": "Snack Stack Smash खेलें",
+    "myWallet": "मेरा Wallet",
+    "leaderboard": "Leaderboard",
+    "loginHint": "खेलें और Coins कमाएं — Register करके save करें!"
+  },
+  "reg": {
+    "title": "Register करें",
+    "subtitle": "अपने YD Coins बचाएं और इनाम जीतें!",
+    "name": "नाम",
+    "namePlaceholder": "आपका नाम",
+    "mobile": "मोबाइल नंबर",
+    "city": "शहर",
+    "selectCity": "शहर चुनें",
+    "dob": "जन्मतिथि (वैकल्पिक)",
+    "consent": "मैं Yellow Diamond को अपना डेटा rewards और offers के लिए share करने की अनुमति देता/देती हूं।",
+    "sendOtp": "OTP भेजें",
+    "otpSent": "OTP +91{{mobile}} पर भेजा गया",
+    "enterOtp": "6 अंकों का OTP दर्ज करें",
+    "verifyOtp": "OTP Verify करें",
+    "changeNumber": "नंबर बदलें",
+    "success": "वाह {{name}}! आप registered हैं! 🎉",
+    "errorName": "कृपया सही नाम दर्ज करें (कम से कम 2 अक्षर)",
+    "errorMobile": "कृपया सही 10 अंकों का मोबाइल नंबर दर्ज करें",
+    "errorCity": "कृपया अपना शहर चुनें",
+    "errorAge": "आपकी उम्र कम से कम 13 साल होनी चाहिए",
+    "errorOtpSend": "OTP भेजने में समस्या हुई। कृपया दोबारा कोशिश करें।",
+    "errorOtpLength": "OTP 6 अंकों का होना चाहिए",
+    "errorOtpInvalid": "गलत OTP। कृपया दोबारा कोशिश करें।"
+  },
+  "wallet": {
+    "title": "मेरा YD Wallet",
+    "balance": "YD Coins Balance",
+    "ydCoins": "YD Coins",
+    "earned": "कमाए",
+    "redeemed": "Redeem किए",
+    "redeemSoon": "जल्द आ रहा है — Blinkit & Zepto पर Coins Redeem करें!",
+    "redeemDesc": "अपने YD Coins को Blinkit और Zepto पर Yellow Diamond products के discount में बदलें।",
+    "comingSoon": "Coming Soon",
+    "playAgain": "फिर खेलें"
+  },
+  "leaderboard": {
+    "title": "आज का Leaderboard",
+    "today": "आज के Top 10 खिलाड़ी",
+    "you": "आप",
+    "empty": "आज अभी तक कोई score नहीं। पहले बनें!"
+  },
+  "common": {
+    "back": "वापस",
+    "loading": "लोड हो रहा है…",
+    "error": "कुछ गलत हुआ। दोबारा कोशिश करें।"
+  }
+}

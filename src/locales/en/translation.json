@@ -1,0 +1,57 @@
+{
+  "home": {
+    "title": "Yellow Diamond\nCrunch Run",
+    "tagline": "Play, Win & Earn YD Coins!",
+    "playRunner": "Play Crunch Run",
+    "playBreaker": "Play Snack Stack Smash",
+    "myWallet": "My Wallet",
+    "leaderboard": "Leaderboard",
+    "loginHint": "Play & earn Coins — Register to save them!"
+  },
+  "reg": {
+    "title": "Register",
+    "subtitle": "Save your YD Coins and win rewards!",
+    "name": "Name",
+    "namePlaceholder": "Your name",
+    "mobile": "Mobile Number",
+    "city": "City",
+    "selectCity": "Select city",
+    "dob": "Date of Birth (optional)",
+    "consent": "I agree to share my data with Yellow Diamond for rewards and offers.",
+    "sendOtp": "Send OTP",
+    "otpSent": "OTP sent to +91{{mobile}}",
+    "enterOtp": "Enter 6-digit OTP",
+    "verifyOtp": "Verify OTP",
+    "changeNumber": "Change number",
+    "success": "Welcome {{name}}! You're registered! 🎉",
+    "errorName": "Please enter a valid name (at least 2 characters)",
+    "errorMobile": "Please enter a valid 10-digit mobile number",
+    "errorCity": "Please select your city",
+    "errorAge": "You must be at least 13 years old",
+    "errorOtpSend": "Failed to send OTP. Please try again.",
+    "errorOtpLength": "OTP must be 6 digits",
+    "errorOtpInvalid": "Incorrect OTP. Please try again."
+  },
+  "wallet": {
+    "title": "My YD Wallet",
+    "balance": "YD Coins Balance",
+    "ydCoins": "YD Coins",
+    "earned": "Earned",
+    "redeemed": "Redeemed",
+    "redeemSoon": "Coming Soon — Redeem Coins on Blinkit & Zepto!",
+    "redeemDesc": "Convert your YD Coins into discounts on Yellow Diamond products on Blinkit and Zepto.",
+    "comingSoon": "Coming Soon",
+    "playAgain": "Play Again"
+  },
+  "leaderboard": {
+    "title": "Today's Leaderboard",
+    "today": "Top 10 Players Today",
+    "you": "You",
+    "empty": "No scores yet today. Be the first!"
+  },
+  "common": {
+    "back": "Back",
+    "loading": "Loading…",
+    "error": "Something went wrong. Please try again."
+  }
+}
