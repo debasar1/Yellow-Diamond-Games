@@ -48,18 +48,38 @@ export const SCORE_CONFIG = {
     { key: 'token-coin',     points: 50, coins: 5 },  // special YD Coin token
   ],
 
+  // Obstacle scoring rules
+  // - obs-rival (competitor brand) → lose points, NO life lost
+  // - obs-barrier / obs-spill (generic hazards) → lose a life
+  OBSTACLES: {
+    'obs-rival':   { type: 'competitor', pointPenalty: 50, losesLife: false },
+    'obs-barrier': { type: 'hazard',     pointPenalty: 0,  losesLife: true  },
+    'obs-spill':   { type: 'hazard',     pointPenalty: 0,  losesLife: true  },
+  },
+
+  // Competitor penalty can be changed via Supabase game_config without a code release
+  COMPETITOR_PENALTY: 50,   // points deducted per competitor brand hit
+
+  // Breaker: competitor bricks deduct points when broken (ball bounces through them)
+  // YD bricks add points as normal
+  BREAKER_COMPETITOR_PENALTY: 30,
+
   // Breaker level-complete bonus
   LEVEL_BONUS: 50,
 
   // Fun facts shown when a brick breaks (bilingual)
   FUN_FACTS: {
-    'brick-chips':   'क्या आप जानते हैं? Yellow Diamond Chips असली आलू से बनते हैं! / Did you know? Made from real potatoes!',
-    'brick-rings':   'Yellow Diamond Rings — कुरकुरे Rings, असली मज़ा! / Crunchy Rings, real fun!',
-    'brick-puffs':   'Puffs हल्के और स्वादिष्ट — बच्चों के बीच सबसे लोकप्रिय! / Light and tasty — kids love them!',
-    'brick-namkeen': 'Namkeen — भारतीय स्वाद, हर घर में! / Classic Indian flavour, in every home!',
-    'brick-gold':    '🎉 YD Coin मिली! Coins जमा करके इनाम जीतें! / YD Coin! Collect coins to win rewards!',
-    'brick-boss':    '🏆 Boss तोड़ा! शाबाश! / Boss smashed! Well done!'
-  }
+    'brick-chips':      'क्या आप जानते हैं? Yellow Diamond Chips असली आलू से बनते हैं! / Did you know? Made from real potatoes!',
+    'brick-rings':      'Yellow Diamond Rings — कुरकुरे Rings, असली मज़ा! / Crunchy Rings, real fun!',
+    'brick-puffs':      'Puffs हल्के और स्वादिष्ट — बच्चों के बीच सबसे लोकप्रिय! / Light and tasty — kids love them!',
+    'brick-namkeen':    'Namkeen — भारतीय स्वाद, हर घर में! / Classic Indian flavour, in every home!',
+    'brick-gold':       '🎉 YD Coin मिली! Coins जमा करके इनाम जीतें! / YD Coin! Collect coins to win rewards!',
+    'brick-boss':       '🏆 Boss तोड़ा! शाबाश! / Boss smashed! Well done!',
+    'brick-rival':      '❌ प्रतिद्वंद्वी Brand! -30 अंक! / Rival brand! -30 points! Stick with Yellow Diamond! 🟡'
+  },
+
+  // Which brick keys are competitor bricks (penalise instead of reward)
+  COMPETITOR_BRICK_KEYS: ['brick-rival']
 };
 
 /**
@@ -68,36 +88,39 @@ export const SCORE_CONFIG = {
  * Rows cycle for levels beyond the defined set.
  */
 export const BREAKER_LAYOUT = [
-  // Level 1
+  // Level 1 — Intro: all YD bricks, no rivals yet
   {
     rows: [
-      { key: 'brick-chips',   hp: 1, points: 10, coins: 0 },
-      { key: 'brick-rings',   hp: 1, points: 15, coins: 0 },
-      { key: 'brick-puffs',   hp: 2, points: 25, coins: 0 },
-      { key: 'brick-namkeen', hp: 2, points: 30, coins: 0 },
-      { key: 'brick-gold',    hp: 1, points: 50, coins: 5 },
+      { key: 'brick-chips',   hp: 1, points: 10,  coins: 0 },
+      { key: 'brick-rings',   hp: 1, points: 15,  coins: 0 },
+      { key: 'brick-puffs',   hp: 2, points: 25,  coins: 0 },
+      { key: 'brick-namkeen', hp: 2, points: 30,  coins: 0 },
+      { key: 'brick-gold',    hp: 1, points: 50,  coins: 5 },
     ]
   },
-  // Level 2
+  // Level 2 — Rivals introduced: one row of competitor bricks (avoid for score)
   {
     rows: [
-      { key: 'brick-namkeen', hp: 2, points: 30, coins: 0 },
-      { key: 'brick-puffs',   hp: 2, points: 25, coins: 0 },
-      { key: 'brick-rings',   hp: 1, points: 15, coins: 0 },
-      { key: 'brick-gold',    hp: 1, points: 50, coins: 5 },
-      { key: 'brick-chips',   hp: 1, points: 10, coins: 0 },
+      { key: 'brick-namkeen', hp: 2, points: 30,  coins: 0 },
+      { key: 'brick-rival',   hp: 1, points: -30, coins: 0 },  // ❌ competitor — loses 30 pts
+      { key: 'brick-puffs',   hp: 2, points: 25,  coins: 0 },
+      { key: 'brick-rings',   hp: 1, points: 15,  coins: 0 },
+      { key: 'brick-gold',    hp: 1, points: 50,  coins: 5 },
+      { key: 'brick-chips',   hp: 1, points: 10,  coins: 0 },
       { key: 'brick-boss',    hp: 5, points: 100, coins: 10 },
     ]
   },
-  // Level 3+
+  // Level 3+ — Two rival rows mixed in for higher challenge
   {
     rows: [
       { key: 'brick-boss',    hp: 5, points: 100, coins: 10 },
-      { key: 'brick-gold',    hp: 1, points: 50, coins: 5  },
-      { key: 'brick-namkeen', hp: 3, points: 35, coins: 0  },
-      { key: 'brick-puffs',   hp: 3, points: 30, coins: 0  },
-      { key: 'brick-rings',   hp: 2, points: 20, coins: 0  },
-      { key: 'brick-chips',   hp: 1, points: 10, coins: 0  },
+      { key: 'brick-rival',   hp: 1, points: -30, coins: 0  },  // ❌ competitor
+      { key: 'brick-gold',    hp: 1, points: 50,  coins: 5  },
+      { key: 'brick-namkeen', hp: 3, points: 35,  coins: 0  },
+      { key: 'brick-rival',   hp: 1, points: -30, coins: 0  },  // ❌ competitor
+      { key: 'brick-puffs',   hp: 3, points: 30,  coins: 0  },
+      { key: 'brick-rings',   hp: 2, points: 20,  coins: 0  },
+      { key: 'brick-chips',   hp: 1, points: 10,  coins: 0  },
     ]
   }
 ];

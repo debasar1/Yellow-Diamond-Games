@@ -107,9 +107,11 @@ The game runs as a **Progressive Web App (PWA)** — no app download required. I
 
 ### Scoring Rules — Configurable Design
 The scoring rules are deliberately designed to be rule-set configurable via the admin panel. V0 ships with:
-- **YD Product collected** → +points (amount TBD per product type)
-- **Competitor brand hit** → no effect (visual only in V0)
-- **Obstacle hit** → life lost or speed penalty
+- **YD Product collected / brick broken** → +points (amount varies by product type)
+- **Competitor brand hit (Runner)** → **-50 points**, no life lost
+- **Competitor brick broken (Breaker)** → **-30 points**, no life lost
+- **Generic hazard hit (barrier / spill)** → life lost
+All penalty and reward values are stored in the `game_config` Supabase table and can be tuned without a code release.
 
 The scoring weights and competitor interaction rules can be changed without a code release by updating the game config in Supabase.
 
@@ -232,16 +234,20 @@ Two game formats will be prototyped in Sprint 1. The client will play-test both 
 
 ## 7. Scoring System
 
-### Base Scoring Rules (V0 Config)
+### Base Scoring Rules
 
-| Event | Score Delta | YD Coin Impact |
-|---|---|---|
-| Collect YD Product token | +10 to +30 (by type) | Contributes to coin tally |
-| Use power-up | No direct score | Enables faster collection |
-| Hit obstacle (Runner) | 0 pts | Life lost |
-| Hit competitor brand visual | 0 pts (V0) | No effect (V0) |
-| Complete level/wave (Breaker) | +50 pts bonus | +5 coins bonus |
-| Boss brick destroyed (Breaker) | +100 pts | +10 coins |
+| Event | Score Delta | Life Impact | YD Coin Impact |
+|---|---|---|---|
+| Collect YD Product token (Runner) | +10 to +50 (by type) | None | Contributes to coin tally |
+| Hit YD product brick (Breaker) | +10 to +100 (by type) | None | Contributes to coin tally |
+| Hit competitor brand obstacle (Runner) | **-50 pts** | No life lost | None |
+| Hit competitor brick (Breaker) | **-30 pts** | No life lost | None |
+| Hit generic hazard (barrier / spill) | 0 pts | **Life lost** | None |
+| Use power-up | 0 pts | None | Enables faster collection |
+| Complete level/wave (Breaker) | +50 pts bonus | None | +5 coins bonus |
+| Boss brick destroyed (Breaker) | +100 pts | None | +10 coins |
+
+**Scoring design rationale:** Competitor hits are a _score penalty_ (not a life penalty) — this keeps the game running longer while creating a clear brand association: Yellow Diamond = gain, competitors = lose. All penalty values are stored in `game_config` and can be adjusted without a code release.
 
 ### Score → YD Coins Conversion (V0 Default)
 - **1,000 points = 10 YD Coins**

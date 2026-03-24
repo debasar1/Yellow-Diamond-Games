@@ -1,6 +1,9 @@
 import Phaser from 'phaser';
 import { GAME_CONFIG, SCORE_CONFIG, BREAKER_LAYOUT } from '../gameConstants';
 
+// Competitor brick asset: red/grey brick labelled with rival brand silhouette
+// Key: 'brick-rival' (loaded in Preload.js)
+
 /**
  * Breaker Scene — Arkanoid / Brick Breaker (Format B: "Snack Stack Smash")
  *
@@ -147,13 +150,29 @@ export default class BreakerScene extends Phaser.Scene {
     brick.setData('hp', hp);
 
     if (hp <= 0) {
-      const pts   = brick.getData('points');
-      const coins = brick.getData('coins');
-      this.sound.play('sfx-collect', { volume: 0.5 });
-      this._addScore(pts);
-      if (coins > 0) this._addCoins(coins);
-      this._showFloatingText(`+${pts}`, brick.x, brick.y, '#E53935');
-      this._showFunFact(brick.getData('type'), brick.x, brick.y);
+      const brickType = brick.getData('type');
+      const isRival   = SCORE_CONFIG.COMPETITOR_BRICK_KEYS.includes(brickType);
+
+      if (isRival) {
+        // ── Competitor brick: deduct points, no coins, red flash ──────────
+        const penalty = SCORE_CONFIG.BREAKER_COMPETITOR_PENALTY;
+        this.score = Math.max(0, this.score - penalty);
+        this.hudScene.updateScore(this.score);
+        this.sound.play('sfx-hit', { volume: 0.5 });
+        this._showFloatingText(`-${penalty}`, brick.x, brick.y, '#E53935');
+        this._showFunFact(brickType, brick.x, brick.y);
+        this.cameras.main.flash(250, 255, 0, 0, false);
+      } else {
+        // ── YD product brick: award points and coins ───────────────────────
+        const pts   = brick.getData('points');
+        const coins = brick.getData('coins');
+        this.sound.play('sfx-collect', { volume: 0.5 });
+        this._addScore(pts);
+        if (coins > 0) this._addCoins(coins);
+        this._showFloatingText(`+${pts}`, brick.x, brick.y, '#43A047');
+        this._showFunFact(brickType, brick.x, brick.y);
+      }
+
       brick.destroy();
       this._checkLevelComplete();
     } else {

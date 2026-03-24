@@ -7,8 +7,10 @@ import Player from '../objects/Player';
  *
  * Lanes: 3 vertical lanes. Swipe/tap to switch.
  * Lives: 3 hearts.
- * Collectibles: YD product tokens → score + coins.
- * Obstacles: barriers, spills, rival visuals (V0: visual only, no penalty score).
+ * Collectibles: YD product tokens → +score +coins.
+ * Obstacles:
+ *   - obs-rival (competitor brand) → -COMPETITOR_PENALTY points, NO life lost
+ *   - obs-barrier / obs-spill (hazards) → lose a life
  * Power-ups: shield, magnet, jump boost, coin burst.
  */
 export default class RunnerScene extends Phaser.Scene {
@@ -243,14 +245,30 @@ export default class RunnerScene extends Phaser.Scene {
 
   _onHit(player, obstacle) {
     if (this.player.isInvincible) return;
+
+    const key     = obstacle.texture.key;
+    const config  = SCORE_CONFIG.OBSTACLES[key] || { type: 'hazard', pointPenalty: 0, losesLife: true };
+
     this.sound.play('sfx-hit', { volume: 0.7 });
     obstacle.destroy();
-    this.lives--;
-    this.hudScene.updateLives(this.lives);
-    this.player.triggerHit();
 
-    if (this.lives <= 0) {
-      this._triggerGameOver();
+    if (config.type === 'competitor') {
+      // ── Competitor brand hit: deduct points, flash score, no life lost ──
+      const penalty = config.pointPenalty || SCORE_CONFIG.COMPETITOR_PENALTY;
+      this.score = Math.max(0, this.score - penalty);
+      this.hudScene.updateScore(this.score);
+      this._showFloatingText(`-${penalty}`, this.player.sprite.x, this.player.sprite.y - 40, '#E53935');
+      this._showFloatingText('❌ Rival!', this.player.sprite.x, this.player.sprite.y - 80, '#fff');
+      // Brief red camera flash to signal the penalty
+      this.cameras.main.flash(300, 255, 0, 0, false);
+    } else {
+      // ── Hazard hit: lose a life ──────────────────────────────────────────
+      this.lives--;
+      this.hudScene.updateLives(this.lives);
+      this.player.triggerHit();
+      if (this.lives <= 0) {
+        this._triggerGameOver();
+      }
     }
   }
 

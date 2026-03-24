@@ -55,6 +55,7 @@ export default class PreloadScene extends Phaser.Scene {
     this.load.image('brick-namkeen', 'assets/breaker/brick_namkeen.webp');
     this.load.image('brick-gold',    'assets/breaker/brick_gold.webp');
     this.load.image('brick-boss',    'assets/breaker/brick_boss.webp');
+    this.load.image('brick-rival',   'assets/breaker/brick_rival.webp');  // competitor brand — loses points
 
     // ── Shared UI ───────────────────────────────────────────────────────────
     this.load.image('heart-full',    'assets/ui/heart_full.webp');
