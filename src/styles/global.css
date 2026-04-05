@@ -1,92 +1,566 @@
-/* ── Brand Design Tokens ─────────────────────────────────────────────────── */
+/* ================================================================
+   Yellow Diamond — Flavor-Burst Universe Design System
+   Based on Stitch design exports (Google Stitch)
+   ================================================================ */
+
+/* ── Custom Properties / Design Tokens ─────────────────────────── */
 :root {
-  --yd-yellow:      #FFD700;
-  --yd-yellow-dark: #FFA000;
-  --yd-red:         #E53935;
-  --yd-red-dark:    #B71C1C;
-  --yd-green:       #43A047;
-  --yd-bg:          #FFF8E1;
-  --yd-text:        #3E2723;
-  --yd-subtext:     #5D4037;
-  --yd-white:       #FFFFFF;
-  --radius:         16px;
-  --shadow:         0 4px 16px rgba(0,0,0,0.15);
-  --font:           'Baloo 2', 'Noto Sans Devanagari', sans-serif;
+  /* Color Tokens (from Stitch tailwind config) */
+  --color-background:               #fff8f7;
+  --color-surface:                  #fff8f7;
+  --color-surface-dim:              #ffcfc8;
+  --color-surface-container-low:    #fff0ee;
+  --color-surface-container:        #ffdad5;
+  --color-surface-container-high:   #ffe5e0;
+  --color-surface-container-highest: #ffdad5;
+
+  --color-primary:                  #745b00;
+  --color-primary-container:        #ffcc00;
+  --color-on-primary:               #3d2f00;
+  --color-on-primary-container:     #241a00;
+
+  --color-secondary:                #b3291e;
+  --color-secondary-container:      #ffdad5;
+  --color-on-secondary:             #ffffff;
+  --color-on-secondary-container:   #410001;
+
+  --color-tertiary:                 #006e1c;
+  --color-tertiary-container:       #95f990;
+  --color-on-tertiary:              #ffffff;
+  --color-on-tertiary-container:    #002105;
+
+  --color-on-background:            #410001;
+  --color-on-surface:               #410001;
+  --color-on-surface-variant:       #534341;
+  --color-outline:                  #857370;
+  --color-outline-variant:          #d8c2be;
+
+  --color-error:                    #ba1a1a;
+  --color-error-container:          #ffdad6;
+
+  /* Brand shortcuts */
+  --yd-red:    #b3291e;
+  --yd-yellow: #ffcc00;
+  --yd-green:  #006e1c;
+  --yd-cream:  #fff8f7;
+  --yd-brown:  #410001;
+
+  /* Typography */
+  --font-display:  'Plus Jakarta Sans', 'Noto Sans Devanagari', sans-serif;
+  --font-body:     'Be Vietnam Pro', 'Noto Sans Devanagari', sans-serif;
+
+  /* Spacing */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+
+  /* Border radius */
+  --radius-sm:   8px;
+  --radius-md:   16px;
+  --radius-lg:   24px;
+  --radius-xl:   32px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-card:   0 4px 20px rgba(65,1,1,0.10);
+  --shadow-float:  drop-shadow(0 10px 15px rgba(65,1,1,0.15));
+  --shadow-btn:    0 6px 0 #7a1a12;
+  --shadow-btn-sm: 0 4px 0 #7a1a12;
+
+  /* Z-index layers */
+  --z-base:    0;
+  --z-card:    10;
+  --z-nav:     100;
+  --z-overlay: 200;
+  --z-modal:   300;
 }
 
-/* ── Reset ───────────────────────────────────────────────────────────────── */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* ── Reset / Base ───────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
 
 html, body {
   height: 100%;
-  overflow: hidden;           /* prevent scroll on mobile game */
-  background: var(--yd-yellow);
-  color: var(--yd-text);
-  font-family: var(--font);
+  overflow: hidden;
+  background: var(--color-background);
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--color-on-background);
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  -webkit-tap-highlight-color: transparent; /* no flash on mobile tap */
-  user-select: none;
 }
 
 #root {
   height: 100%;
   display: flex;
   flex-direction: column;
+  max-width: 430px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
 }
 
-/* ── Shared button styles ────────────────────────────────────────────────── */
-.btn-primary {
-  background: var(--yd-red);
-  color: var(--yd-white);
+button, input, select, textarea {
+  font-family: inherit;
   border: none;
-  border-radius: var(--radius);
-  padding: 14px 28px;
-  font-family: var(--font);
-  font-size: 18px;
-  font-weight: 700;
-  cursor: pointer;
-  box-shadow: var(--shadow);
-  transition: transform 80ms, opacity 150ms;
-  width: 100%;
-}
-.btn-primary:active { transform: scale(0.97); }
-.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
-
-.btn-secondary {
-  background: var(--yd-yellow-dark);
-  color: var(--yd-text);
-  border: 2px solid var(--yd-text);
-  border-radius: var(--radius);
-  padding: 12px 24px;
-  font-family: var(--font);
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  width: 100%;
-}
-
-/* ── Form inputs ─────────────────────────────────────────────────────────── */
-input, select {
-  font-family: var(--font);
-  font-size: 16px;
-  padding: 12px 16px;
-  border: 2px solid #d0b860;
-  border-radius: 12px;
-  background: #FFFDE7;
-  color: var(--yd-text);
-  width: 100%;
   outline: none;
-  transition: border-color 200ms;
+  background: none;
 }
-input:focus, select:focus { border-color: var(--yd-red); }
 
-/* ── Scrollable areas (wallet, leaderboard) ──────────────────────────────── */
-.scrollable {
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* ── Layout Patterns ────────────────────────────────────────────── */
+.page {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   overflow-y: auto;
+  overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
 }
 
-/* ── Utility ─────────────────────────────────────────────────────────────── */
-.text-center { text-align: center; }
-.mt-8 { margin-top: 8px; }
-.mt-16 { margin-top: 16px; }
+/* ── Background Pattern (Stitch signature) ──────────────────────── */
+.bg-pattern {
+  background-color: var(--color-background);
+  background-image: radial-gradient(var(--color-surface-container) 2px, transparent 2px);
+  background-size: 32px 32px;
+}
+
+/* ── Glassmorphism (HUD overlays, Stitch screen_2) ──────────────── */
+.glass {
+  background: rgba(255, 248, 247, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: var(--radius-full);
+}
+
+/* ── Torn Edge Card (Stitch screen_4 promo banner) ──────────────── */
+.torn-edge {
+  clip-path: polygon(
+    0% 0%, 100% 0%, 100% 88%,
+    97% 93%, 94% 88%, 91% 95%,
+    88% 90%, 85% 96%, 82% 91%,
+    79% 97%, 76% 92%, 73% 98%,
+    70% 93%, 67% 99%, 64% 94%,
+    61% 100%, 58% 95%, 55% 100%,
+    52% 94%, 49% 99%, 46% 93%,
+    43% 98%, 40% 92%, 37% 97%,
+    34% 91%, 31% 96%, 28% 90%,
+    25% 95%, 22% 89%, 19% 94%,
+    16% 88%, 13% 93%, 10% 87%,
+    7% 92%, 4% 86%, 0% 92%
+  );
+}
+
+/* ── Snack Float (product pack images) ──────────────────────────── */
+.snack-float {
+  filter: var(--shadow-float);
+}
+
+/* ── Cards ──────────────────────────────────────────────────────── */
+.card {
+  background: var(--color-surface-container-low);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-card);
+}
+
+.card-yellow {
+  background: var(--color-primary-container);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+}
+
+/* ── Buttons ────────────────────────────────────────────────────── */
+.btn-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  width: 100%;
+  padding: 18px var(--space-6);
+  background: var(--color-secondary);
+  color: var(--color-on-secondary);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 18px;
+  letter-spacing: 0.5px;
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-btn);
+  cursor: pointer;
+  user-select: none;
+  transition: transform 80ms ease, box-shadow 80ms ease;
+  position: relative;
+  top: 0;
+}
+
+.btn-primary:active {
+  top: 4px;
+  box-shadow: var(--shadow-btn-sm);
+}
+
+.btn-secondary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  width: 100%;
+  padding: 16px var(--space-6);
+  background: var(--color-surface-container);
+  color: var(--color-on-surface);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 16px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  user-select: none;
+  transition: background 150ms;
+}
+
+.btn-secondary:active {
+  background: var(--color-surface-dim);
+}
+
+.btn-outline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  width: 100%;
+  padding: 14px var(--space-6);
+  background: transparent;
+  color: var(--color-secondary);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 16px;
+  border-radius: var(--radius-full);
+  box-shadow: inset 0 0 0 2px var(--color-secondary);
+  cursor: pointer;
+  user-select: none;
+}
+
+.btn-yellow {
+  background: var(--color-primary-container);
+  color: var(--color-on-primary-container);
+  box-shadow: 0 6px 0 #c49a00;
+}
+
+.btn-green {
+  background: var(--color-tertiary);
+  color: var(--color-on-tertiary);
+  box-shadow: 0 6px 0 #004d13;
+}
+
+/* ── Bottom Nav (Stitch screen_4) ───────────────────────────────── */
+.bottom-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: var(--color-surface-container-low);
+  padding: 8px 16px 20px;
+  position: relative;
+  z-index: var(--z-nav);
+  box-shadow: 0 -4px 20px rgba(65,1,1,0.08);
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  padding: 6px 16px;
+  border-radius: var(--radius-full);
+  font-size: 11px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  color: var(--color-on-surface-variant);
+  transition: background 150ms;
+  user-select: none;
+}
+
+.nav-item.active {
+  background: var(--color-primary-container);
+  color: var(--color-on-primary-container);
+  font-weight: 700;
+}
+
+.nav-item .material-symbols-outlined {
+  font-size: 24px;
+}
+
+/* ── Typography ─────────────────────────────────────────────────── */
+.display-xl {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 48px;
+  line-height: 1.1;
+  color: var(--color-on-background);
+}
+
+.display-lg {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 36px;
+  line-height: 1.15;
+  color: var(--color-on-background);
+}
+
+.headline {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1.2;
+  color: var(--color-on-background);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--color-on-surface);
+}
+
+.body-lg {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--color-on-surface);
+}
+
+.body-sm {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--color-on-surface-variant);
+}
+
+.label {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  color: var(--color-on-surface-variant);
+}
+
+/* ── Form Inputs ─────────────────────────────────────────────────── */
+.input-field {
+  width: 100%;
+  padding: 16px var(--space-5);
+  background: var(--color-surface);
+  color: var(--color-on-surface);
+  font-family: var(--font-body);
+  font-size: 16px;
+  border-radius: var(--radius-md);
+  box-shadow: 0 0 0 1.5px var(--color-outline-variant);
+  transition: box-shadow 150ms;
+}
+
+.input-field:focus {
+  box-shadow: 0 0 0 2px var(--color-secondary);
+}
+
+.input-field::placeholder {
+  color: var(--color-outline);
+}
+
+/* ── YD Coin Pill (Stitch glassmorphism) ────────────────────────── */
+.coin-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: rgba(255, 204, 0, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: var(--radius-full);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--color-on-primary-container);
+  box-shadow: 0 2px 12px rgba(65,1,1,0.12);
+}
+
+/* ── Score Bento (Stitch screen_0 game over grid) ───────────────── */
+.bento-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+
+.bento-cell {
+  background: var(--color-surface-container-low);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.bento-cell.span-2 {
+  grid-column: span 2;
+}
+
+.bento-value {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 28px;
+  color: var(--color-on-background);
+}
+
+.bento-label {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--color-on-surface-variant);
+}
+
+/* ── Chip Tags ──────────────────────────────────────────────────── */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.chip-red   { background: var(--color-secondary-container); color: var(--color-secondary); }
+.chip-yellow { background: var(--color-primary-container);   color: var(--color-on-primary-container); }
+.chip-green  { background: var(--color-tertiary-container);  color: var(--color-tertiary); }
+
+/* ── Leaderboard rows ────────────────────────────────────────────── */
+.leaderboard-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-container-low);
+  margin-bottom: var(--space-2);
+}
+
+.leaderboard-row.rank-1 { background: #fff8cc; }
+.leaderboard-row.rank-2 { background: #f5f5f5; }
+.leaderboard-row.rank-3 { background: #fff0e8; }
+.leaderboard-row.is-me  { box-shadow: inset 0 0 0 2px var(--color-secondary); }
+
+.leaderboard-rank  { font-family: var(--font-display); font-weight: 800; font-size: 16px; width: 28px; text-align: center; }
+.leaderboard-name  { flex: 1; font-family: var(--font-body); font-weight: 600; font-size: 15px; color: var(--color-on-surface); }
+.leaderboard-score { font-family: var(--font-display); font-weight: 700; font-size: 16px; color: var(--color-secondary); }
+
+/* ── Page headers ────────────────────────────────────────────────── */
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-5) var(--space-5) var(--space-4);
+}
+
+.page-header .back-btn {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  background: var(--color-surface-container);
+  cursor: pointer;
+  color: var(--color-on-surface);
+}
+
+/* ── Loading spinner ────────────────────────────────────────────── */
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--color-surface-container);
+  border-top-color: var(--color-secondary);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Animations ─────────────────────────────────────────────────── */
+@keyframes floatUp {
+  0%   { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-48px); }
+}
+
+@keyframes pulse-ring {
+  0%   { transform: scale(1); opacity: 0.6; }
+  50%  { transform: scale(1.06); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.6; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(40px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.pulse    { animation: pulse-ring 2s ease-in-out infinite; }
+.slide-up { animation: slideUp 300ms ease both; }
+.fade-in  { animation: fadeIn 250ms ease both; }
+
+/* ── Badge ──────────────────────────────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: var(--radius-full);
+  font-size: 11px;
+  font-weight: 700;
+  background: var(--color-secondary);
+  color: #fff;
+}
+
+/* ── PWA safe area ──────────────────────────────────────────────── */
+.safe-bottom { padding-bottom: env(safe-area-inset-bottom, 16px); }
+.safe-top    { padding-top: env(safe-area-inset-top, 16px); }
+
+/* ── Material Symbols sizing ────────────────────────────────────── */
+.material-symbols-outlined { user-select: none; }
+.icon-sm { font-size: 18px !important; }
+.icon-md { font-size: 24px !important; }
+.icon-lg { font-size: 32px !important; }
+.icon-xl { font-size: 48px !important; }
+
+/* ── Desktop frame ──────────────────────────────────────────────── */
+@media (min-width: 480px) {
+  html, body {
+    background: #e8dbd9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #root {
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.20);
+    height: 844px;
+    width: 390px;
+  }
+}

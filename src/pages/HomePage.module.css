@@ -1,23 +1,125 @@
-.container {
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  min-height: 100vh; background: var(--yd-yellow); padding: 24px 20px; gap: 16px;
+/* HomePage — Stitch screen_4 */
+
+.wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-background);
+  background-image: radial-gradient(var(--color-surface-container) 2px, transparent 2px);
+  background-size: 32px 32px;
+  overflow: hidden;
 }
-.langToggle {
-  position: absolute; top: 16px; right: 16px;
-  background: var(--yd-red); color: #fff; border: none; border-radius: 20px;
-  padding: 6px 16px; font-family: var(--font); font-size: 14px; font-weight: 600; cursor: pointer;
+
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px 8px;
+  padding-top: max(16px, env(safe-area-inset-top));
 }
-.logoWrap { text-align: center; }
-.logoPlaceholder { font-size: 80px; line-height: 1; }
-.title { font-size: 32px; font-weight: 800; color: var(--yd-red-dark); white-space: pre-line; }
-.tagline { font-size: 16px; color: var(--yd-subtext); margin-top: 6px; }
-.btnGroup { display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 320px; }
-.btnPrimary { background: var(--yd-red); color: #fff; border: none; border-radius: var(--radius);
-  padding: 16px; font-family: var(--font); font-size: 18px; font-weight: 700; cursor: pointer; box-shadow: var(--shadow); }
-.btnSecondary { background: var(--yd-yellow-dark); color: var(--yd-text); border: 2px solid var(--yd-text);
-  border-radius: var(--radius); padding: 14px; font-family: var(--font); font-size: 17px; font-weight: 600; cursor: pointer; }
-.btnWallet { background: var(--yd-green); color: #fff; border: none; border-radius: var(--radius);
-  padding: 12px 28px; font-family: var(--font); font-size: 16px; font-weight: 700; cursor: pointer; }
-.btnLink { background: none; border: none; font-family: var(--font); font-size: 15px;
-  color: var(--yd-subtext); text-decoration: underline; cursor: pointer; }
-.loginHint { font-size: 14px; color: var(--yd-subtext); text-align: center; max-width: 280px; }
+
+.logoMark { display: flex; align-items: center; gap: 8px; }
+.logoImg  { width: 36px; height: 36px; }
+.logoText {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 20px;
+  color: var(--color-secondary);
+  letter-spacing: -0.5px;
+}
+
+.topRight { display: flex; align-items: center; gap: 10px; }
+
+.langBtn {
+  padding: 6px 14px;
+  background: var(--color-surface-container);
+  color: var(--color-on-surface-variant);
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.hero {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  min-height: 0;
+}
+
+.mascotWrap { width: 200px; height: 200px; display: flex; align-items: center; justify-content: center; }
+.mascot {
+  width: 180px;
+  height: auto;
+  object-fit: contain;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-10px); }
+}
+
+.titleBlock { text-align: center; margin-top: 12px; }
+.brandLabel {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--color-secondary);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.gameTitle {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 28px;
+  line-height: 1.15;
+  color: var(--color-on-background);
+  white-space: pre-line;
+}
+.tagline {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--color-on-surface-variant);
+  margin-top: 6px;
+}
+
+.ctaBlock {
+  padding: 16px 20px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.playBtn    { font-size: 20px !important; padding: 20px !important; }
+.secondaryBtn { font-size: 16px; }
+.guestHint {
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--color-on-surface-variant);
+}
+
+.promoBanner {
+  margin: 0 12px;
+  background: var(--color-tertiary);
+  padding: 16px 20px 32px;
+}
+.promoInner { display: flex; align-items: center; gap: 12px; }
+.promoTitle { font-family: var(--font-display); font-weight: 700; font-size: 14px; color: #fff; }
+.promoSub   { font-family: var(--font-body); font-size: 12px; color: rgba(255,255,255,0.8); margin-top: 2px; }
+.promoBadge {
+  margin-left: auto;
+  background: var(--color-primary-container);
+  color: var(--color-on-primary-container);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+}

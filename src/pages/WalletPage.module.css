@@ -1,38 +1,137 @@
-.container {
-  min-height: 100vh; background: var(--yd-yellow); padding: 20px;
-  display: flex; flex-direction: column; align-items: center; gap: 16px;
+/* WalletPage — Stitch screen_3 */
+
+.wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding-bottom: 24px;
 }
-.loading { display: flex; align-items: center; justify-content: center; height: 100vh; font-size: 20px; }
-.back { align-self: flex-start; background: none; border: none; font-family: var(--font);
-  font-size: 15px; color: var(--yd-subtext); cursor: pointer; }
-.title { font-size: 26px; font-weight: 800; color: var(--yd-red-dark); }
+
+.centered {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Header */
+.headerLabel {
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--color-secondary);
+  text-transform: uppercase;
+}
+
+.headerTitle {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 22px;
+  color: var(--color-on-background);
+}
+
+/* Balance hero */
 .balanceCard {
-  background: var(--yd-red); color: #fff; border-radius: 24px; padding: 28px;
-  width: 100%; max-width: 340px; text-align: center; box-shadow: var(--shadow);
+  margin: 0 20px 20px;
+  background: var(--color-secondary);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(179,41,30,0.30);
 }
-.balanceLabel { font-size: 14px; opacity: 0.85; }
-.balanceNum { font-size: 64px; font-weight: 800; line-height: 1.1; }
-.balanceSub { font-size: 16px; font-weight: 600; opacity: 0.9; }
-.statsRow { display: flex; gap: 16px; width: 100%; max-width: 340px; }
-.stat {
-  flex: 1; background: #fff; border-radius: 16px; padding: 16px;
-  text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+
+.balanceLabel {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
 }
-.statNum { font-size: 28px; font-weight: 800; color: var(--yd-red-dark); }
-.statLabel { font-size: 13px; color: var(--yd-subtext); margin-top: 2px; }
-.redeemBox {
-  background: #fff; border-radius: 20px; padding: 20px; width: 100%;
-  max-width: 340px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+
+.balanceRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
 }
-.redeemTitle { font-size: 17px; font-weight: 700; color: var(--yd-text); margin-bottom: 6px; }
-.redeemDesc { font-size: 13px; color: var(--yd-subtext); margin-bottom: 14px; }
-.btnComingSoon {
-  background: #ccc; color: #fff; border: none; border-radius: var(--radius);
-  padding: 12px 24px; font-family: var(--font); font-size: 16px; font-weight: 700;
-  cursor: not-allowed; width: 100%;
+
+.balanceCoinIcon {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
 }
-.btnPlay {
-  background: var(--yd-green); color: #fff; border: none; border-radius: var(--radius);
-  padding: 14px 28px; font-family: var(--font); font-size: 17px; font-weight: 700;
-  cursor: pointer; width: 100%; max-width: 340px;
+
+.balanceNum {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 56px;
+  color: #fff;
+  line-height: 1;
+}
+
+.balanceSub {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: rgba(255,255,255,0.7);
+  margin-top: 6px;
+}
+
+/* Redeem card */
+.redeemCard {
+  margin: 0 20px 16px;
+  background: var(--color-surface-container-low);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  box-shadow: var(--shadow-card);
+}
+
+.redeemHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.redeemTitle {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--color-on-surface);
+}
+
+.redeemSub {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--color-on-surface-variant);
+  margin-top: 2px;
+}
+
+.redeemDesc {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--color-on-surface-variant);
+  margin-bottom: 14px;
+  line-height: 1.5;
+}
+
+.partnerLogos {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.partnerChip {
+  background: var(--color-surface-container);
+  color: var(--color-on-surface-variant);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 13px;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+}
+
+.redeemBtn {
+  cursor: not-allowed !important;
 }

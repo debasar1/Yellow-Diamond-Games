@@ -64,14 +64,15 @@ export default class PreloadScene extends Phaser.Scene {
     this.load.image('pause-btn',     'assets/ui/pause_btn.webp');
     this.load.spritesheet('confetti','assets/ui/confetti.webp', { frameWidth: 64, frameHeight: 64 });
 
-    // ── Audio ───────────────────────────────────────────────────────────────
-    this.load.audio('bgm-runner',    'assets/audio/bgm_runner.ogg');
-    this.load.audio('bgm-breaker',   'assets/audio/bgm_breaker.ogg');
-    this.load.audio('sfx-collect',   'assets/audio/sfx_collect.ogg');
-    this.load.audio('sfx-hit',       'assets/audio/sfx_hit.ogg');
-    this.load.audio('sfx-powerup',   'assets/audio/sfx_powerup.ogg');
-    this.load.audio('sfx-gameover',  'assets/audio/sfx_gameover.ogg');
-    this.load.audio('sfx-levelup',   'assets/audio/sfx_levelup.ogg');
+    // ── Audio (WAV — no external dependency) ────────────────────────────────
+    this.load.audio('bgm-runner',    'assets/audio/bgm-runner.wav');
+    this.load.audio('bgm-breaker',   'assets/audio/bgm-breaker.wav');
+    this.load.audio('sfx-collect',   'assets/audio/sfx-collect.wav');
+    this.load.audio('sfx-hit',       'assets/audio/sfx-hit.wav');
+    this.load.audio('sfx-jump',      'assets/audio/sfx-jump.wav');
+    this.load.audio('sfx-powerup',   'assets/audio/sfx-powerup.wav');
+    this.load.audio('sfx-gameover',  'assets/audio/sfx-gameover.wav');
+    this.load.audio('sfx-levelup',   'assets/audio/sfx-levelup.wav');
   }
 
   create() {
@@ -87,26 +88,45 @@ export default class PreloadScene extends Phaser.Scene {
     const cx = width / 2;
     const cy = height / 2;
 
-    // Background
-    this.add.rectangle(cx, cy, width, height, 0xFFD700);
+    // Background — Stitch cream with dot pattern feel
+    this.add.rectangle(cx, cy, width, height, 0xfff8f7);
 
-    // Logo placeholder text
-    this.add.text(cx, cy - 80, '🟡', { fontSize: '64px' }).setOrigin(0.5);
-    this.add.text(cx, cy - 10, 'Yellow Diamond', {
-      fontFamily: 'Baloo 2',
-      fontSize: '28px',
-      color: '#8B0000',
+    // Dot pattern (simple grid of small circles)
+    const gfx = this.add.graphics();
+    gfx.fillStyle(0xffdad5, 1);
+    for (let x = 16; x < width; x += 32) {
+      for (let y = 16; y < height; y += 32) {
+        gfx.fillCircle(x, y, 2);
+      }
+    }
+
+    // Logo text
+    this.add.text(cx, cy - 80, 'YD', {
+      fontFamily: 'Plus Jakarta Sans, sans-serif',
+      fontSize: '52px',
+      color: '#b3291e',
       fontStyle: 'bold'
+    }).setOrigin(0.5);
+
+    this.add.text(cx, cy - 20, 'CRUNCH RUN', {
+      fontFamily: 'Plus Jakarta Sans, sans-serif',
+      fontSize: '22px',
+      color: '#410001',
+      fontStyle: 'bold',
+      letterSpacing: 3
     }).setOrigin(0.5);
 
     // Progress bar track
     const barW = width * 0.6;
-    const barH = 18;
-    this.add.rectangle(cx, cy + 60, barW, barH, 0xffa000).setOrigin(0.5);
-    const bar = this.add.rectangle(cx - barW / 2, cy + 60, 0, barH, 0xE53935).setOrigin(0, 0.5);
+    const barH = 10;
+    const barY = cy + 60;
+    this.add.rectangle(cx, barY, barW, barH, 0xffdad5, 1).setOrigin(0.5);
+    const bar = this.add.rectangle(cx - barW / 2, barY, 4, barH, 0xb3291e).setOrigin(0, 0.5);
 
-    this.add.text(cx, cy + 90, 'लोड हो रहा है… / Loading…', {
-      fontFamily: 'Baloo 2', fontSize: '14px', color: '#5D4037'
+    this.add.text(cx, barY + 24, 'लोड हो रहा है…', {
+      fontFamily: 'Plus Jakarta Sans, sans-serif',
+      fontSize: '13px',
+      color: '#534341'
     }).setOrigin(0.5);
 
     this.load.on('progress', (v) => { bar.width = barW * v; });

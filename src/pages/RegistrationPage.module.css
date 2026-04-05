@@ -1,32 +1,226 @@
-.container {
-  min-height: 100vh; background: var(--yd-bg);
-  display: flex; align-items: center; justify-content: center; padding: 20px;
+/* RegistrationPage — Stitch design system */
+
+.wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow-y: auto;
+  padding: max(24px, env(safe-area-inset-top)) 20px 32px;
 }
+
+.progressDots {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: var(--color-surface-container);
+  transition: background 300ms, width 300ms;
+}
+
+.dotActive {
+  background: var(--color-secondary);
+  width: 24px;
+}
+
+.dotDone {
+  background: var(--color-tertiary);
+}
+
 .card {
-  background: #fff; border-radius: 24px; padding: 28px 24px;
-  width: 100%; max-width: 380px; box-shadow: var(--shadow);
+  width: 100%;
+  max-width: 400px;
+  background: var(--color-surface);
+  border-radius: var(--radius-xl);
+  padding: 28px 24px;
+  box-shadow: var(--shadow-card);
 }
-.title { font-size: 26px; font-weight: 800; color: var(--yd-red-dark); margin-bottom: 4px; }
-.subtitle { font-size: 14px; color: var(--yd-subtext); margin-bottom: 20px; }
-.form { display: flex; flex-direction: column; gap: 12px; }
-.form label { font-size: 14px; font-weight: 600; color: var(--yd-text); margin-bottom: -6px; }
-.mobileRow { display: flex; gap: 8px; align-items: center; }
-.prefix {
-  background: #f5f5f5; border: 2px solid #d0b860; border-radius: 12px;
-  padding: 12px 10px; font-size: 16px; font-weight: 600; color: var(--yd-subtext); white-space: nowrap;
+
+.cardHeader {
+  text-align: center;
+  margin-bottom: 24px;
 }
-.otpInfo { font-size: 14px; color: var(--yd-subtext); text-align: center; }
-.otpInput { letter-spacing: 8px; font-size: 24px; text-align: center; font-weight: 700; }
-.consent { font-size: 12px; color: #888; line-height: 1.5; }
-.error { font-size: 13px; color: var(--yd-red); background: #ffebee; padding: 8px 12px; border-radius: 8px; }
-.btnSubmit {
-  background: var(--yd-red); color: #fff; border: none; border-radius: var(--radius);
-  padding: 14px; font-family: var(--font); font-size: 17px; font-weight: 700;
-  cursor: pointer; margin-top: 4px;
+
+.cardTitle {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 22px;
+  color: var(--color-on-background);
+  margin-top: 8px;
 }
-.btnSubmit:disabled { opacity: 0.5; cursor: not-allowed; }
-.btnLink { background: none; border: none; font-family: var(--font); font-size: 14px;
-  color: var(--yd-subtext); text-decoration: underline; cursor: pointer; text-align: center; }
-.successBox { text-align: center; padding: 20px 0; }
-.successIcon { font-size: 64px; }
-.successText { font-size: 20px; font-weight: 700; color: var(--yd-green); margin-top: 12px; }
+
+.cardSub {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--color-on-surface-variant);
+  margin-top: 4px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-on-surface-variant);
+}
+
+.select {
+  cursor: pointer;
+}
+
+.consentRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+  padding: 12px;
+  background: var(--color-surface-container-low);
+  border-radius: var(--radius-md);
+}
+
+.checkbox {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  accent-color: var(--color-secondary);
+}
+
+.consentText {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--color-on-surface-variant);
+  line-height: 1.4;
+}
+
+.error {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--color-error);
+  padding: 10px 14px;
+  background: var(--color-error-container);
+  border-radius: var(--radius-sm);
+}
+
+/* OTP */
+.otpInfoBox {
+  background: var(--color-surface-container-low);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+}
+
+.otpSent {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-on-surface);
+}
+
+.otpHint {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--color-on-surface-variant);
+  margin-top: 4px;
+}
+
+.otpBoxRow {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin: 8px 0;
+  position: relative;
+  z-index: 1;
+}
+
+.otpBox {
+  width: 44px;
+  height: 56px;
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-container-low);
+  box-shadow: 0 0 0 1.5px var(--color-outline-variant);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--color-on-surface);
+  transition: box-shadow 150ms;
+}
+
+.otpBoxFilled {
+  box-shadow: 0 0 0 2px var(--color-secondary);
+  background: var(--color-secondary-container);
+}
+
+/* Invisible real input sits over the box row */
+.otpHiddenInput {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 70px;
+  top: -8px;
+  left: 0;
+  cursor: text;
+}
+
+.changeLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: var(--color-on-surface-variant);
+  font-family: var(--font-body);
+  font-size: 13px;
+  cursor: pointer;
+  padding: 8px;
+  margin-top: 4px;
+}
+
+/* Success */
+.successBox {
+  text-align: center;
+  padding: 16px 0;
+}
+
+.successAnim {
+  font-size: 56px;
+  animation: pop 500ms cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+
+@keyframes pop {
+  0%   { transform: scale(0); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.successText {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--color-on-background);
+  margin-top: 12px;
+}
+
+.successSub {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--color-on-surface-variant);
+  margin-top: 6px;
+}
