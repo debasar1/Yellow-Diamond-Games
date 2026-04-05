@@ -162,6 +162,8 @@ CREATE POLICY "analytics_insert" ON analytics_events FOR INSERT
 CREATE POLICY "config_read" ON game_config FOR SELECT USING (true);
 
 -- ── Indexes ───────────────────────────────────────────────────────────────
-CREATE INDEX IF NOT EXISTS idx_sessions_user_date ON game_sessions (user_id, DATE(created_at));
+-- Note: DATE(created_at) cannot be used in an index (TIMESTAMPTZ cast is STABLE not IMMUTABLE).
+-- Index on (user_id, created_at) covers the same daily-query patterns efficiently.
+CREATE INDEX IF NOT EXISTS idx_sessions_user_date ON game_sessions (user_id, created_at DESC);
 CREATE INDEX IF NOT EXISTS idx_sessions_score     ON game_sessions (score DESC);
 CREATE INDEX IF NOT EXISTS idx_analytics_event    ON analytics_events (event_name, created_at DESC);
