@@ -294,30 +294,35 @@ wallet
 | Field | Type | Required | Validation |
 |---|---|---|---|
 | Name | Text | Yes | 2–50 characters |
-| Mobile Number | Numeric | Yes | 10-digit Indian mobile, OTP-verified |
+| Email Address | Email | Yes | Valid email format, OTP-verified |
 | City | Dropdown | Yes | Predefined list of top 50 Indian cities + "Other" |
-| Age / DOB | Date picker | Yes | Must be 13 years or older |
+| Age / DOB | Date picker | No | Must be 13 years or older if provided |
 
-### OTP Flow
-1. User enters 10-digit mobile number.
-2. System sends OTP via **MSG91** (preferred for India cost efficiency) or Twilio India.
-3. User enters 6-digit OTP. Valid for 5 minutes, 3 retry attempts allowed.
-4. On success: user record created or existing user logged in.
-5. Mobile number is the unique identifier. No password required.
+### OTP Flow (V0 — Zero Cost)
+V0 uses **Supabase built-in email OTP** — no external vendor, no SMS cost.
+
+1. User enters email address.
+2. Supabase sends a 6-digit OTP to that email (via Supabase's own SMTP — free).
+3. User enters 6-digit OTP. Valid for 5 minutes.
+4. On success: Supabase Auth session created; user profile upserted in `users` table.
+5. Email is the unique identifier. No password required.
+
+**V1 upgrade path:** Swap `otp.js` to call a Supabase Edge Function hitting MSG91 / Fast2SMS for mobile OTP. The registration UI requires no changes — only the lib file changes.
 
 ### Data Storage (Supabase `users` table)
 ```sql
 users
-├── id (uuid, primary key)
-├── mobile (text, unique, not null)
+├── id (uuid, primary key — synced with Supabase Auth)
+├── email (text, unique, not null)
 ├── name (text)
 ├── city (text)
-├── dob (date)
+├── dob (date, nullable)
 ├── created_at (timestamp)
 ├── last_active (timestamp)
 ├── total_sessions (integer, default 0)
 ├── referral_code (text, unique) -- generated on registration
 ├── referred_by (uuid, FK → users.id, nullable)
+-- V1: add mobile (text, unique) when switching to mobile OTP
 ```
 
 ### Privacy & Consent

@@ -1,26 +1,40 @@
 import { supabase } from './supabase';
 
 /**
- * Creates a new user record or returns the existing one.
+ * Creates a new user record or updates the existing one.
  * Called after successful OTP verification.
  *
- * @param {{ name, mobile, city, dob }} form
+ * V0: unique on email (Supabase Auth also uses email as the unique identifier).
+ * V1 upgrade path: add mobile field when switching to mobile OTP.
+ *
+ * @param {{ name, email, city, dob }} form
  * @returns {Promise<Object>} user row
  */
-export async function createOrLoginUser({ name, mobile, city, dob }) {
-  // Upsert user — unique on mobile
+export async function createOrLoginUser({ name, email, city, dob }) {
+  // Supabase Auth already created/verified the auth.users row via OTP.
+  // Now upsert our public users table with the profile details.
+  const { data: { user: authUser } } = await supabase.auth.getUser();
+  if (!authUser) throw new Error('No authenticated user found');
+
   const { data, error } = await supabase
     .from('users')
     .upsert(
-      { mobile, name, city, dob: dob || null, last_active: new Date().toISOString() },
-      { onConflict: 'mobile', ignoreDuplicates: false }
+      {
+        id:          authUser.id,   // sync with Supabase Auth UUID
+        email,
+        name,
+        city,
+        dob:         dob || null,
+        last_active: new Date().toISOString()
+      },
+      { onConflict: 'id', ignoreDuplicates: false }
     )
     .select()
     .single();
 
   if (error) throw new Error(error.message);
 
-  // Ensure wallet row exists
+  // Ensure wallet row exists for this user
   await supabase
     .from('wallets')
     .upsert({ user_id: data.id }, { onConflict: 'user_id', ignoreDuplicates: true });
