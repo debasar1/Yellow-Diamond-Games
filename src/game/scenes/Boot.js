@@ -18,7 +18,7 @@ export default class BootScene extends Phaser.Scene {
   preload() {
     // Load only the minimum assets needed for the loading screen itself
     // (logo placeholder — replace with actual WebP asset from brand team)
-    this.load.svg('logo-placeholder', 'assets/placeholder/logo.svg');
+    this.load.svg('logo-placeholder', '/assets/placeholder/logo.svg');
   }
 
   create() {

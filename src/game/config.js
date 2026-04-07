@@ -11,7 +11,7 @@ import HUDScene from './scenes/HUD';
  * The canvas fills the parent container — React mounts it inside #game-container.
  */
 const GameConfig = {
-  type: Phaser.AUTO,
+  type: Phaser.CANVAS,
   parent: 'game-container',
   backgroundColor: '#FFD700',
   scale: {

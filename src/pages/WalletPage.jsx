@@ -57,7 +57,7 @@ export default function WalletPage({ user }) {
           {isHindi ? 'YD Coins बैलेंस' : 'YD Coins Balance'}
         </p>
         <div className={styles.balanceRow}>
-          <img src="/assets/ui/yd_coin_icon.webp" className={styles.balanceCoinIcon} alt="" />
+          <img src="/assets/ui/yd_coin_icon.png" className={styles.balanceCoinIcon} alt="" />
           <span className={styles.balanceNum}>{balance.toLocaleString()}</span>
         </div>
         <p className={styles.balanceSub}>YD Coins</p>
