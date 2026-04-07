@@ -5,7 +5,9 @@ import GamePage from './pages/GamePage';
 import WalletPage from './pages/WalletPage';
 import LeaderboardPage from './pages/LeaderboardPage';
 import RegistrationPage from './pages/RegistrationPage';
-import { supabase } from './lib/supabase';
+import { supabase, hasSupabase } from './lib/supabase';
+
+const LS_USER = 'yd_user';
 
 /**
  * App — top-level router.
@@ -17,18 +19,27 @@ export default function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Check existing session on mount
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null);
-      setLoading(false);
-    });
+    if (hasSupabase) {
+      // Check existing session on mount
+      supabase.auth.getSession().then(({ data: { session } }) => {
+        setUser(session?.user ?? null);
+        setLoading(false);
+      });
 
-    // Listen for auth state changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null);
-    });
+      // Listen for auth state changes
+      const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+        setUser(session?.user ?? null);
+      });
 
-    return () => subscription.unsubscribe();
+      return () => subscription.unsubscribe();
+    }
+
+    // ── localStorage fallback: restore user from previous session ────────────
+    try {
+      const stored = JSON.parse(localStorage.getItem(LS_USER));
+      if (stored) setUser(stored);
+    } catch { /* ignore */ }
+    setLoading(false);
   }, []);
 
   if (loading) {

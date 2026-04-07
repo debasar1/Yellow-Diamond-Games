@@ -138,7 +138,7 @@ export default function GamePage({ user }) {
             {/* Coin earned callout */}
             {coins > 0 && (
               <div className={styles.coinCallout}>
-                <img src="/assets/ui/yd_coin_icon.webp" className={styles.calloutIcon} alt="" />
+                <img src="/assets/ui/yd_coin_icon.png" className={styles.calloutIcon} alt="" />
                 <span>
                   {isHindi
                     ? `आपने ${coins} YD Coins कमाए!`

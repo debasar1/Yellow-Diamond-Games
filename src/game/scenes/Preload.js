@@ -18,61 +18,61 @@ export default class PreloadScene extends Phaser.Scene {
     this._createLoadingBar(width, height);
 
     // ── Runner assets ───────────────────────────────────────────────────────
-    this.load.image('bg-sky',        'assets/runner/bg_sky.webp');
-    this.load.image('bg-ground',     'assets/runner/bg_ground.webp');
-    this.load.image('bg-mid',        'assets/runner/bg_mid.webp');
+    this.load.image('bg-sky',        '/assets/runner/bg_sky.png');
+    this.load.image('bg-ground',     '/assets/runner/bg_ground.png');
+    this.load.image('bg-mid',        '/assets/runner/bg_mid.png');
 
-    this.load.spritesheet('mascot-run', 'assets/runner/mascot_run.webp', { frameWidth: 96, frameHeight: 128 });
-    this.load.spritesheet('mascot-jump','assets/runner/mascot_jump.webp', { frameWidth: 96, frameHeight: 128 });
-    this.load.spritesheet('mascot-slide','assets/runner/mascot_slide.webp', { frameWidth: 128, frameHeight: 72 });
-    this.load.spritesheet('mascot-hit', 'assets/runner/mascot_hit.webp', { frameWidth: 96, frameHeight: 128 });
+    this.load.spritesheet('mascot-run', '/assets/runner/mascot_run.png', { frameWidth: 96, frameHeight: 128 });
+    this.load.spritesheet('mascot-jump','/assets/runner/mascot_jump.png', { frameWidth: 96, frameHeight: 128 });
+    this.load.spritesheet('mascot-slide','/assets/runner/mascot_slide.png', { frameWidth: 128, frameHeight: 72 });
+    this.load.spritesheet('mascot-hit', '/assets/runner/mascot_hit.png', { frameWidth: 96, frameHeight: 128 });
 
     // Collectibles
-    this.load.image('token-chips',   'assets/collectibles/token_chips.webp');
-    this.load.image('token-rings',   'assets/collectibles/token_rings.webp');
-    this.load.image('token-puffs',   'assets/collectibles/token_puffs.webp');
-    this.load.image('token-chulbule','assets/collectibles/token_chulbule.webp');
-    this.load.image('token-namkeen', 'assets/collectibles/token_namkeen.webp');
-    this.load.image('token-coin',    'assets/collectibles/token_yd_coin.webp');
+    this.load.image('token-chips',   '/assets/collectibles/token_chips.png');
+    this.load.image('token-rings',   '/assets/collectibles/token_rings.png');
+    this.load.image('token-puffs',   '/assets/collectibles/token_puffs.png');
+    this.load.image('token-chulbule','/assets/collectibles/token_chulbule.png');
+    this.load.image('token-namkeen', '/assets/collectibles/token_namkeen.png');
+    this.load.image('token-coin',    '/assets/collectibles/token_coin.png');
 
     // Obstacles
-    this.load.image('obs-barrier',   'assets/runner/obstacle_barrier.webp');
-    this.load.image('obs-spill',     'assets/runner/obstacle_spill.webp');
-    this.load.image('obs-rival',     'assets/runner/obstacle_rival.webp');  // competitor snack visual
+    this.load.image('obs-barrier',   '/assets/runner/obstacle_barrier.png');
+    this.load.image('obs-spill',     '/assets/runner/obstacle_spill.png');
+    this.load.image('obs-rival',     '/assets/runner/obstacle_rival.png');  // competitor snack visual
 
     // Power-ups
-    this.load.image('pu-shield',     'assets/powerups/pu_shield.webp');
-    this.load.image('pu-magnet',     'assets/powerups/pu_magnet.webp');
-    this.load.image('pu-jump',       'assets/powerups/pu_jump.webp');
-    this.load.image('pu-coinburst',  'assets/powerups/pu_coinburst.webp');
+    this.load.image('pu-shield',     '/assets/powerups/pu_shield.png');
+    this.load.image('pu-magnet',     '/assets/powerups/pu_magnet.png');
+    this.load.image('pu-jump',       '/assets/powerups/pu_jump.png');
+    this.load.image('pu-coinburst',  '/assets/powerups/pu_coinburst.png');
 
     // ── Breaker assets ──────────────────────────────────────────────────────
-    this.load.image('paddle',        'assets/breaker/paddle.webp');
-    this.load.image('ball',          'assets/breaker/ball.webp');
-    this.load.image('brick-chips',   'assets/breaker/brick_chips.webp');
-    this.load.image('brick-rings',   'assets/breaker/brick_rings.webp');
-    this.load.image('brick-puffs',   'assets/breaker/brick_puffs.webp');
-    this.load.image('brick-namkeen', 'assets/breaker/brick_namkeen.webp');
-    this.load.image('brick-gold',    'assets/breaker/brick_gold.webp');
-    this.load.image('brick-boss',    'assets/breaker/brick_boss.webp');
-    this.load.image('brick-rival',   'assets/breaker/brick_rival.webp');  // competitor brand — loses points
+    this.load.image('paddle',        '/assets/breaker/paddle.png');
+    this.load.image('ball',          '/assets/breaker/ball.png');
+    this.load.image('brick-chips',   '/assets/breaker/brick_chips.png');
+    this.load.image('brick-rings',   '/assets/breaker/brick_rings.png');
+    this.load.image('brick-puffs',   '/assets/breaker/brick_puffs.png');
+    this.load.image('brick-namkeen', '/assets/breaker/brick_namkeen.png');
+    this.load.image('brick-gold',    '/assets/breaker/brick_gold.png');
+    this.load.image('brick-boss',    '/assets/breaker/brick_boss.png');
+    this.load.image('brick-rival',   '/assets/breaker/brick_rival.png');  // competitor brand — loses points
 
     // ── Shared UI ───────────────────────────────────────────────────────────
-    this.load.image('heart-full',    'assets/ui/heart_full.webp');
-    this.load.image('heart-empty',   'assets/ui/heart_empty.webp');
-    this.load.image('yd-coin-icon',  'assets/ui/yd_coin_icon.webp');
-    this.load.image('pause-btn',     'assets/ui/pause_btn.webp');
-    this.load.spritesheet('confetti','assets/ui/confetti.webp', { frameWidth: 64, frameHeight: 64 });
+    this.load.image('heart-full',    '/assets/ui/heart_full.png');
+    this.load.image('heart-empty',   '/assets/ui/heart_empty.png');
+    this.load.image('yd-coin-icon',  '/assets/ui/yd_coin_icon.png');
+    this.load.image('pause-btn',     '/assets/ui/pause_btn.png');
+    this.load.spritesheet('confetti','/assets/ui/confetti.png', { frameWidth: 64, frameHeight: 64 });
 
     // ── Audio (WAV — no external dependency) ────────────────────────────────
-    this.load.audio('bgm-runner',    'assets/audio/bgm-runner.wav');
-    this.load.audio('bgm-breaker',   'assets/audio/bgm-breaker.wav');
-    this.load.audio('sfx-collect',   'assets/audio/sfx-collect.wav');
-    this.load.audio('sfx-hit',       'assets/audio/sfx-hit.wav');
-    this.load.audio('sfx-jump',      'assets/audio/sfx-jump.wav');
-    this.load.audio('sfx-powerup',   'assets/audio/sfx-powerup.wav');
-    this.load.audio('sfx-gameover',  'assets/audio/sfx-gameover.wav');
-    this.load.audio('sfx-levelup',   'assets/audio/sfx-levelup.wav');
+    this.load.audio('bgm-runner',    '/assets/audio/bgm-runner.mp3');
+    this.load.audio('bgm-breaker',   '/assets/audio/bgm-breaker.mp3');
+    this.load.audio('sfx-collect',   '/assets/audio/sfx-collect.mp3');
+    this.load.audio('sfx-hit',       '/assets/audio/sfx-hit.mp3');
+    this.load.audio('sfx-jump',      '/assets/audio/sfx-jump.mp3');
+    this.load.audio('sfx-powerup',   '/assets/audio/sfx-powerup.mp3');
+    this.load.audio('sfx-gameover',  '/assets/audio/sfx-gameover.mp3');
+    this.load.audio('sfx-levelup',   '/assets/audio/sfx-levelup.mp3');
   }
 
   create() {

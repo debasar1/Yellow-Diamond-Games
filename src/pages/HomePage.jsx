@@ -57,7 +57,7 @@ export default function HomePage({ user }) {
           {/* Coin balance pill (if logged in) */}
           {user && (
             <div className="coin-pill">
-              <img src="/assets/ui/yd_coin_icon.webp" className="coin-icon" alt="" />
+              <img src="/assets/ui/yd_coin_icon.png" className="coin-icon" alt="" />
               <span>{coins}</span>
             </div>
           )}
@@ -69,7 +69,7 @@ export default function HomePage({ user }) {
         {/* Mascot / product pack hero image */}
         <div className={styles.mascotWrap}>
           <img
-            src="/assets/placeholder/pack_01.webp"
+            src="/assets/placeholder/pack_01.png"
             alt="Yellow Diamond Chips"
             className={`${styles.mascot} snack-float`}
             onError={e => { e.currentTarget.style.display = 'none'; }}

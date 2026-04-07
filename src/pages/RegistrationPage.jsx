@@ -69,10 +69,10 @@ export default function RegistrationPage({ onSuccess }) {
 
     setLoading(true);
     try {
-      await verifyOtp(form.email, otp);
+      const otpResult = await verifyOtp(form.email, otp);
       Analytics.otpVerified?.(true);
 
-      const user = await createOrLoginUser(form);
+      const user = await createOrLoginUser(form, otpResult?.user ?? null);
       Analytics.registrationComplete?.(form.city);
 
       const pending = sessionStorage.getItem('pendingSession');
