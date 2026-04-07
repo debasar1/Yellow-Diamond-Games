@@ -1,13 +1,9 @@
-import { supabase } from './supabase';
+import { supabase, hasSupabase } from './supabase';
 
 /**
  * Lightweight analytics client.
- * Stores events in Supabase `analytics_events` table.
- * All PII (mobile) is excluded — only user_id (UUID) is used.
- *
- * Usage:
- *   import { track } from '@/lib/analytics';
- *   track('game_start', { game_format: 'runner' });
+ * Stores events in Supabase `analytics_events` table when available,
+ * otherwise logs to console in dev mode.
  */
 
 let _userId = null;
@@ -26,12 +22,16 @@ export function setAnalyticsUser(userId) {
  */
 export async function track(event, props = {}) {
   try {
-    await supabase.from('analytics_events').insert({
-      event_name:  event,
-      user_id:     _userId || null,
-      properties:  props,
-      created_at:  new Date().toISOString()
-    });
+    if (hasSupabase) {
+      await supabase.from('analytics_events').insert({
+        event_name:  event,
+        user_id:     _userId || null,
+        properties:  props,
+        created_at:  new Date().toISOString()
+      });
+    } else {
+      console.debug('[YD Analytics]', event, props);
+    }
   } catch (_) {
     // Silently ignore — analytics must never break the game
   }

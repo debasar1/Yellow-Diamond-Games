@@ -33,7 +33,7 @@ export default class PreloadScene extends Phaser.Scene {
     this.load.image('token-puffs',   'assets/collectibles/token_puffs.webp');
     this.load.image('token-chulbule','assets/collectibles/token_chulbule.webp');
     this.load.image('token-namkeen', 'assets/collectibles/token_namkeen.webp');
-    this.load.image('token-coin',    'assets/collectibles/token_yd_coin.webp');
+    this.load.image('token-coin',    'assets/collectibles/token_coin.webp');
 
     // Obstacles
     this.load.image('obs-barrier',   'assets/runner/obstacle_barrier.webp');
